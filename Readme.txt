@@ -8,4 +8,10 @@ Resource used = Python , MySql
 STEPS TO RUN THIS PROJECT
 
 1.open MySql and create a database
-2.create 
+2.enter your user and password in the todo.py file , default user is root
+3.open chioce.txt and put zero if not exists
+4.run the main.py file
+
+THIS IS THE STARTING VERSION OF THE PROGRAM WHICH ONLY RUNS IN CMD DECENT NUMBER OR REGULAR BUGS IN MIND
+CONTRIBUTIONS ARE WELCOMED
+MORE VERSION YEST TO COME.....
