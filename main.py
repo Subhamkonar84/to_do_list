@@ -31,5 +31,4 @@ try:
 
 except Exception as err:
     connection.rollback()
-    print("bye byeee")
     print(f"Error: {err}")
