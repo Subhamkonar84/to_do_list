@@ -4,7 +4,6 @@ try:
     file=open("choice.txt",'r')
     point=int(file.read())
     file.close()
-    file=open("choice.txt",'w')
     while(1==1):
         print("\n1.add a task \n2.delete from the list \n3.mark that list as done \n4.display \n5.exit")
         choice = int(input("\nenter your choice from the above options====="))
@@ -24,12 +23,13 @@ try:
             display_task()
     
         elif(choice==5):
-            file.close()
+            fil=open("choice.txt",'w')
+            fil.write(str(point))
+            fil.close()
             exit()
         else:
             print("\nchoose a correct option that is present in the above option")
 
 except Exception as err:
     connection.rollback()
-    print("bye byeee")
     print(f"Error: {err}")
