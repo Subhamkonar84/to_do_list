@@ -2,9 +2,21 @@ import tkinter as tk
 from tkinter import messagebox
 from todo import *
 
-file=open("choice.txt",'r')
-point=int(file.read())
-file.close()
+def getpoint():
+    file=open("choice.txt",'r')
+    point=int(file.read())
+    file.close()
+    return point
+
+def saveup(point):
+    file=open("choice.txt",'w')
+    file.write(str(point+1))
+    file.close()
+
+def savedown(point):
+    file=open("choice.txt",'w')
+    file.write(str(point-1))
+    file.close()
 
 def display():
     data=display_task()
@@ -30,11 +42,13 @@ def display():
 def add_task():
     task = entry.get()
     if task:
-        insert_task(task,point)
+        insert_task(task,getpoint())
+        saveup(getpoint())
         listbox.insert(tk.END, task)
         entry.delete(0, tk.END)
         listbox.delete(0, tk.END)
         display()
+
     else:
         messagebox.showwarning("Warning", "Task cannot be empty!")
 
@@ -42,10 +56,11 @@ def add_task():
 def deletee_task():
     try:
         selected_task_index = listbox.curselection()[0]
-        delete_task(int(selected_task_index)+1,point)
+        delete_task(int(selected_task_index)+1,getpoint())
         listbox.delete(selected_task_index)
         listbox.delete(0, tk.END)
         display()
+        savedown(getpoint())
     except IndexError:
         messagebox.showwarning("Warning", "Select a task to delete!")
 
