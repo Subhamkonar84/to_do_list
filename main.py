@@ -13,7 +13,8 @@ try:
             file.write(str(point))
         
         elif(choice==2):
-            point = delete_task(point)
+            pointt=int(input("\nenter your line num"))
+            point = delete_task(pointt,point)
             file.write(str(point))
         
         elif(choice==3):

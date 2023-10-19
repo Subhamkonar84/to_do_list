@@ -15,9 +15,8 @@ cursor.execute(query)
 
 
 
-def insert_task(point):
+def insert_task(task,point):
     try:
-        task = input("\nENTER YOUR TASK TO ENTER INTO THE LIST======")
         query = "INSERT INTO todo (num,tasks, status) VALUES (%s, %s, %s);"
         para = (point+1,task,False,)
         cursor.execute(query,para)
@@ -26,9 +25,8 @@ def insert_task(point):
     except mysql.connector.Error as err:
         print(f"Error: {err}")
 
-def delete_task(point):
+def delete_task(dell,point):
     try:
-        dell = int(input("\nselect the task you want to delete====="))
         query = "DELETE FROM todo WHERE num=%s"
         cursor.execute(query,(dell,))
         query = "UPDATE todo SET num = num - 1 WHERE num > %s"
@@ -38,11 +36,21 @@ def delete_task(point):
     except mysql.connector.Error as err:
         print(f"Error: {err}")
 
-def done_task():
+def done_task(select):
     try:
-        select = int(input("\nselect one task that you have completed====="))
+        #select = int(input("\nselect one task that you have completed====="))
         query = "UPDATE todo SET status =%s WHERE num=%s"
         cursor.execute(query,(True,select,))
+
+
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+
+def undoo_task(select):
+    try:
+        #select = int(input("\nselect one task that you have completed====="))
+        query = "UPDATE todo SET status =%s WHERE num=%s"
+        cursor.execute(query,(False,select,))
 
 
     except mysql.connector.Error as err:
@@ -52,10 +60,8 @@ def display_task():
     try:
         query = "SELECT * FROM todo;"
         cursor.execute(query)
-        rows = cursor.fetchall()
-        print("\n")
-        for row in rows:
-            print(row)
+        rows = [list(row) for row in cursor.fetchall()]
+        return rows
 
 
     except mysql.connector.Error as err:
