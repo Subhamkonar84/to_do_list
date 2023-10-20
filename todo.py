@@ -13,7 +13,21 @@ cursor = connection.cursor()
 query = "CREATE TABLE IF NOT EXISTS todo (num INT,tasks LONGTEXT,status TINYINT(1) DEFAULT 0);"
 cursor.execute(query)
 
+def getpoint():
+    file=open("choice.txt",'r')
+    point=int(file.read())
+    file.close()
+    return point
 
+def saveup(point):
+    file=open("choice.txt",'w')
+    file.write(str(point+1))
+    file.close()
+
+def savedown(point):
+    file=open("choice.txt",'w')
+    file.write(str(point-1))
+    file.close()
 
 def insert_task(task,point):
     try:

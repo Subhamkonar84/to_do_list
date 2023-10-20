@@ -1,36 +1,42 @@
 from todo import *
 
 try:
-    file=open("choice.txt",'r')
-    point=int(file.read())
-    file.close()
     while(1==1):
-        print("\n1.add a task \n2.delete from the list \n3.mark that list as done \n4.display \n5.exit")
-        choice = int(input("\nenter your choice from the above options====="))
+        print("\n1.ADD A TASK TO BE ADDED \n2.DELETE THE TASK FROM THE LIST \n3.MARK A TASK AS DONE \n4.MARK A TASK AS NOT DONE\n5.DISPLAY ALL TASK \n6.EXIT THIS APPLICATION")
+        choice = int(input("\nENTER THE CHOICE FROM THE ABOVE OPTIONS PROVIDED====="))
         
         if(choice ==1):
-            point = insert_task(point)
-            file.write(str(point))
+            task = input("\nENTER YOUR TASK TO ADD=====")
+            point = insert_task(task,getpoint())
+            saveup(getpoint())
         
         elif(choice==2):
-            pointt=int(input("\nenter your line num"))
-            point = delete_task(pointt,point)
-            file.write(str(point))
+            pointt=int(input("\nENTER THE TASK NUMBER====="))
+            point = delete_task(pointt,getpoint)
+            savedown(getpoint())
         
         elif(choice==3):
-            done_task()
-            
+            select = int(input("\nENTER A LINE YOU WANT TO MARK AS DONE====="))
+            done_task(select)
+
         elif(choice==4):
-            display_task()
-    
+            select = int(input("\nENTER A LINE YOU WANT TO MARK AS NOT DONE====="))
+            undoo_task(select)
+            
         elif(choice==5):
-            fil=open("choice.txt",'w')
-            fil.write(str(point))
-            fil.close()
+            c = display_task()
+            print("NO         TASK                        STATUS")
+            for i in c:
+                if(i[2]==0):
+                    c=str(i[0])+"         "+i[1].upper()+"          "+"NOTE DONE"
+                if(i[2]==1):
+                    c=str(i[0])+"         "+i[1].upper()+"          "+"DONE"
+                print(c)
+    
+        elif(choice==6):
             exit()
         else:
-            print("\nchoose a correct option that is present in the above option")
+            print("\nCHOOSE AN OPTION THAT IS THERE IN THE OPTION LIST*****TRY AGAIN*****...............")
 
 except Exception as err:
-    connection.rollback()
     print(f"Error: {err}")

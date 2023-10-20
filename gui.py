@@ -2,21 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from todo import *
 
-def getpoint():
-    file=open("choice.txt",'r')
-    point=int(file.read())
-    file.close()
-    return point
-
-def saveup(point):
-    file=open("choice.txt",'w')
-    file.write(str(point+1))
-    file.close()
-
-def savedown(point):
-    file=open("choice.txt",'w')
-    file.write(str(point-1))
-    file.close()
 
 def display():
     data=display_task()
